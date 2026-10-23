@@ -56,7 +56,13 @@ export default function App() {
 
   return (
     <div className="app-layout">
+      {/* Background Starry Night & Glowing Moon */}
+      <div className="night-sky"></div>
+      <div className="stars-overlay"></div>
+      <div className="moon"></div>
+
       <div className="app-container">
+        {/* Top Navbar */}
         <Navbar
           search={search}
           setSearch={setSearch}
@@ -69,6 +75,7 @@ export default function App() {
           <PersonalityQuiz onSelectMovie={(id) => setSelectedId(id)} />
         ) : (
           <>
+            {/* Category Filter Pills */}
             {activeTab === 'all' && !search && (
               <>
                 <div className="category-bar">
@@ -91,7 +98,7 @@ export default function App() {
 
             {activeTab === 'favorites' && (
               <h2 className="section-title">
-                <Film size={22} color="#8b5cf6" /> My Watchlist ({favorites.length})
+                <Film size={22} color="#c084fc" /> My Watchlist ({favorites.length})
               </h2>
             )}
 
