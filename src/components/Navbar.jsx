@@ -10,7 +10,7 @@ export default function Navbar({ search, setSearch, activeTab, setActiveTab, onH
       {/* Brand Logo */}
       <div className="brand" onClick={onHomeClick} style={{ cursor: 'pointer' }}>
         <Popcorn size={32} color="#c084fc" />
-        <span>MoviesAndChill</span>
+        <span>Movies Search Place</span>
       </div>
 
       {/* Search Input */}
@@ -50,7 +50,7 @@ export default function Navbar({ search, setSearch, activeTab, setActiveTab, onH
         </button>
       </nav>
 
-      {/* Profile & Guest Toggle */}
+      {/* User Profile Menu */}
       <div style={{ position: 'relative' }}>
         <button
           className="user-profile-btn"

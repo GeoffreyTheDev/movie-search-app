@@ -5,7 +5,7 @@ import MovieModal from './components/MovieModal';
 import PersonalityQuiz from './components/PersonalityQuiz';
 import Footer from './components/Footer';
 import { fetchMovies } from './services/api';
-import { Flame, Film } from 'lucide-react';
+import { Flame, Film, Sparkles } from 'lucide-react';
 
 const CATEGORIES = ['All', 'Sci-Fi', 'Action', 'Drama', 'Comedy', 'Horror', 'Animation', 'Crime', 'Biography'];
 
@@ -16,12 +16,12 @@ export default function App() {
   const [selectedId, setSelectedId] = useState(null);
   const [activeTab, setActiveTab] = useState('all');
   const [favorites, setFavorites] = useState(() => {
-    const saved = localStorage.getItem('moviesAndChill_favs');
+    const saved = localStorage.getItem('moviesSearchPlace_favs');
     return saved ? JSON.parse(saved) : [];
   });
 
   useEffect(() => {
-    localStorage.setItem('moviesAndChill_favs', JSON.stringify(favorites));
+    localStorage.setItem('moviesSearchPlace_favs', JSON.stringify(favorites));
   }, [favorites]);
 
   useEffect(() => {
@@ -56,13 +56,12 @@ export default function App() {
 
   return (
     <div className="app-layout">
-      {/* Background Starry Night & Glowing Moon */}
+      {/* Background Layers */}
       <div className="night-sky"></div>
       <div className="stars-overlay"></div>
       <div className="moon"></div>
 
       <div className="app-container">
-        {/* Top Navbar */}
         <Navbar
           search={search}
           setSearch={setSearch}
@@ -75,9 +74,22 @@ export default function App() {
           <PersonalityQuiz onSelectMovie={(id) => setSelectedId(id)} />
         ) : (
           <>
-            {/* Category Filter Pills */}
+            {/* Home Hero Banner */}
             {activeTab === 'all' && !search && (
               <>
+                <section className="hero-banner">
+                  <div className="hero-badge">
+                    <Sparkles size={14} color="#38bdf8" /> Discover Unlimited Cinema
+                  </div>
+                  <h1 className="hero-title">
+                    Welcome to <span className="highlight-text">Movies Search Place</span>
+                  </h1>
+                  <p className="hero-subtitle">
+                    Explore top-rated film titles, browse trending collections, and unlock personalized recommendations tailored directly to your personal vibe.
+                  </p>
+                </section>
+
+                {/* Category Pills */}
                 <div className="category-bar">
                   {CATEGORIES.map((cat) => (
                     <button
