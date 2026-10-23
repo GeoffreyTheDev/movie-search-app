@@ -6,88 +6,31 @@ function enforceHttps(url) {
   return url.replace(/^http:\/\//i, 'https://');
 }
 
-// Default fallback list in case network is completely offline
 export const FEATURED_MOVIES = [
-  {
-    imdbID: 'tt1375666',
-    Title: 'Inception',
-    Year: '2010',
-    Genre: 'Sci-Fi, Action',
-    Vibe: 'mind-bender',
-    Poster: 'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg',
-    imdbRating: '8.8',
-    Plot: 'A thief who steals corporate secrets through dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.'
-  },
-  {
-    imdbID: 'tt0816692',
-    Title: 'Interstellar',
-    Year: '2014',
-    Genre: 'Sci-Fi, Drama',
-    Vibe: 'mind-bender',
-    Poster: 'https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg',
-    imdbRating: '8.7',
-    Plot: 'When Earth becomes uninhabitable, a team of researchers travels through a wormhole in space to ensure humanity survival.'
-  },
-  {
-    imdbID: 'tt0468569',
-    Title: 'The Dark Knight',
-    Year: '2008',
-    Genre: 'Action, Crime',
-    Vibe: 'adrenaline',
-    Poster: 'https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg',
-    imdbRating: '9.0',
-    Plot: 'When the Joker wreaks havoc on Gotham City, Batman must accept one of the greatest psychological and physical tests of his ability.'
-  },
-  {
-    imdbID: 'tt0111161',
-    Title: 'The Shawshank Redemption',
-    Year: '1994',
-    Genre: 'Drama',
-    Vibe: 'deep-story',
-    Poster: 'https://m.media-amazon.com/images/M/MV5BMTM0MDgwNjMyMl5BMl5BanBnXkFtZTcwNTg3NzAzMw@@._V1_SX300.jpg',
-    imdbRating: '9.3',
-    Plot: 'Over the course of several years, two convicts form a deep friendship, seeking consolation and redemption through basic compassion.'
-  },
-  {
-    imdbID: 'tt0133093',
-    Title: 'The Matrix',
-    Year: '1999',
-    Genre: 'Sci-Fi, Action',
-    Vibe: 'adrenaline',
-    Poster: 'https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg',
-    imdbRating: '8.7',
-    Plot: 'A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.'
-  },
-  {
-    imdbID: 'tt0110357',
-    Title: 'The Lion King',
-    Year: '1994',
-    Genre: 'Animation, Adventure',
-    Vibe: 'chill',
-    Poster: 'https://m.media-amazon.com/images/M/MV5BYTYxNGMyZTYtMjE3MS00MzNjLWE0NTgtMDlmZmRjNWM2OWZjXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg',
-    imdbRating: '8.5',
-    Plot: 'Lion prince Simba and his father are targeted by his bitter uncle, who wants to ascend the throne himself.'
-  },
-  {
-    imdbID: 'tt0109830',
-    Title: 'Forrest Gump',
-    Year: '1994',
-    Genre: 'Comedy, Drama',
-    Vibe: 'chill',
-    Poster: 'https://m.media-amazon.com/images/M/MV5BNWIwODRlZTUtY2U3ZS00Yzg1LWJhNzktMmUxTzk4NTU5MTZmXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg',
-    imdbRating: '8.8',
-    Plot: 'The history of the United States unfolds through the perspective of an Alabama man with an IQ of 75.'
-  },
-  {
-    imdbID: 'tt1457767',
-    Title: 'The Conjuring',
-    Year: '2013',
-    Genre: 'Horror, Mystery',
-    Vibe: 'spooky',
-    Poster: 'https://m.media-amazon.com/images/M/MV5BMTM3NjA1NDMyMV5BMl5BanBnXkFtZTcwMDQzNDMzOQ@@._V1_SX300.jpg',
-    imdbRating: '7.5',
-    Plot: 'Paranormal investigators Ed and Lorraine Warren work to help a family terrorized by a dark presence in their farmhouse.'
-  }
+  { imdbID: 'tt1375666', Title: 'Inception', Year: '2010', Genre: 'Sci-Fi, Action', Vibe: 'mind-bender' },
+  { imdbID: 'tt0816692', Title: 'Interstellar', Year: '2014', Genre: 'Sci-Fi, Drama', Vibe: 'mind-bender' },
+  { imdbID: 'tt0468569', Title: 'The Dark Knight', Year: '2008', Genre: 'Action, Crime', Vibe: 'adrenaline' },
+  { imdbID: 'tt0111161', Title: 'The Shawshank Redemption', Year: '1994', Genre: 'Drama', Vibe: 'deep-story' },
+  { imdbID: 'tt0133093', Title: 'The Matrix', Year: '1999', Genre: 'Sci-Fi, Action', Vibe: 'adrenaline' },
+  { imdbID: 'tt0110357', Title: 'The Lion King', Year: '1994', Genre: 'Animation, Adventure', Vibe: 'chill' },
+  { imdbID: 'tt0109830', Title: 'Forrest Gump', Year: '1994', Genre: 'Comedy, Drama', Vibe: 'chill' },
+  { imdbID: 'tt1457767', Title: 'The Conjuring', Year: '2013', Genre: 'Horror, Mystery', Vibe: 'spooky' },
+  { imdbID: 'tt15398776', Title: 'Oppenheimer', Year: '2023', Genre: 'Biography, Drama', Vibe: 'deep-story' },
+  { imdbID: 'tt1160419', Title: 'Dune', Year: '2021', Genre: 'Sci-Fi, Adventure', Vibe: 'visual' },
+  { imdbID: 'tt0245429', Title: 'Spirited Away', Year: '2001', Genre: 'Animation, Adventure', Vibe: 'chill' },
+  { imdbID: 'tt4633694', Title: 'Spider-Man: Into the Spider-Verse', Year: '2018', Genre: 'Animation, Action', Vibe: 'visual' },
+  { imdbID: 'tt0110912', Title: 'Pulp Fiction', Year: '1994', Genre: 'Crime, Drama', Vibe: 'mind-bender' },
+  { imdbID: 'tt6751668', Title: 'Parasite', Year: '2019', Genre: 'Drama, Thriller', Vibe: 'mind-bender' },
+  { imdbID: 'tt0172495', Title: 'Gladiator', Year: '2000', Genre: 'Action, Adventure', Vibe: 'adrenaline' },
+  { imdbID: 'tt2582802', Title: 'Whiplash', Year: '2014', Genre: 'Drama, Music', Vibe: 'deep-story' },
+  { imdbID: 'tt0137523', Title: 'Fight Club', Year: '1999', Genre: 'Drama', Vibe: 'mind-bender' },
+  { imdbID: 'tt0068646', Title: 'The Godfather', Year: '1972', Genre: 'Crime, Drama', Vibe: 'deep-story' },
+  { imdbID: 'tt0079285', Title: 'Alien', Year: '1979', Genre: 'Horror, Sci-Fi', Vibe: 'spooky' },
+  { imdbID: 'tt6710474', Title: 'Everything Everywhere All at Once', Year: '2022', Genre: 'Sci-Fi, Comedy', Vibe: 'visual' },
+  { imdbID: 'tt0499549', Title: 'Avatar', Year: '2009', Genre: 'Sci-Fi, Action', Vibe: 'visual' },
+  { imdbID: 'tt1856101', Title: 'Blade Runner 2049', Year: '2017', Genre: 'Sci-Fi, Mystery', Vibe: 'visual' },
+  { imdbID: 'tt0848228', Title: 'The Avengers', Year: '2012', Genre: 'Action, Sci-Fi', Vibe: 'adrenaline' },
+  { imdbID: 'tt0371724', Title: 'The Incredibles', Year: '2004', Genre: 'Animation, Action', Vibe: 'chill' }
 ];
 
 export async function fetchMovieDetails(id) {
@@ -104,7 +47,6 @@ export async function fetchMovieDetails(id) {
 }
 
 export async function fetchMovies(query = '') {
-  // If home page load, fetch fresh live API data for all featured movies
   if (!query || query.trim() === '') {
     try {
       const liveFeatured = await Promise.all(
@@ -113,7 +55,7 @@ export async function fetchMovies(query = '') {
           return {
             ...localMovie,
             ...liveData,
-            Poster: enforceHttps(liveData.Poster) || localMovie.Poster
+            Poster: enforceHttps(liveData.Poster)
           };
         })
       );
@@ -136,11 +78,13 @@ export async function fetchMovies(query = '') {
 }
 
 const VIBE_SEARCH_KEYWORDS = {
-  'mind-bender': ['Inception', 'Matrix', 'Truman', 'Mind', 'Time'],
-  'adrenaline': ['Batman', 'Avengers', 'Fast', 'Action', 'Mission'],
-  'chill': ['Disney', 'Story', 'Lego', 'Comedy', 'Panda'],
-  'spooky': ['Conjuring', 'Halloween', 'Evil', 'Horror', 'Ghost'],
-  'deep-story': ['Life', 'Drama', 'Love', 'King', 'World']
+  'mind-bender': ['Inception', 'Matrix', 'Truman', 'Mind', 'Time', 'Shutter'],
+  'adrenaline': ['Batman', 'Avengers', 'Fast', 'Action', 'Mission', 'John Wick'],
+  'chill': ['Disney', 'Story', 'Lego', 'Comedy', 'Panda', 'Pixar'],
+  'spooky': ['Conjuring', 'Halloween', 'Evil', 'Horror', 'Ghost', 'Insidious'],
+  'deep-story': ['Life', 'Drama', 'Love', 'King', 'World', 'Godfather'],
+  'visual': ['Avatar', 'Dune', 'Blade Runner', 'Spider', 'Interstellar'],
+  'comedy': ['Superbad', 'Hangover', 'Step Brothers', 'Comedy', 'Office']
 };
 
 export async function fetchVibeMovies(vibeId) {

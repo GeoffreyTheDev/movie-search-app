@@ -5,15 +5,16 @@ import MovieModal from './components/MovieModal';
 import PersonalityQuiz from './components/PersonalityQuiz';
 import Footer from './components/Footer';
 import { fetchMovies } from './services/api';
+import { Flame, Film } from 'lucide-react';
 
-const CATEGORIES = ['All', 'Sci-Fi', 'Action', 'Drama', 'Comedy', 'Horror', 'Animation'];
+const CATEGORIES = ['All', 'Sci-Fi', 'Action', 'Drama', 'Comedy', 'Horror', 'Animation', 'Crime', 'Biography'];
 
 export default function App() {
   const [search, setSearch] = useState('');
   const [movies, setMovies] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedId, setSelectedId] = useState(null);
-  const [activeTab, setActiveTab] = useState('all'); // 'all', 'match', 'favorites'
+  const [activeTab, setActiveTab] = useState('all');
   const [favorites, setFavorites] = useState(() => {
     const saved = localStorage.getItem('moviesAndChill_favs');
     return saved ? JSON.parse(saved) : [];
@@ -46,7 +47,6 @@ export default function App() {
     setActiveTab('all');
   };
 
-  // Filter movies by category if selected
   const filteredMovies = movies.filter((m) => {
     if (selectedCategory === 'All') return true;
     return m.Genre && m.Genre.includes(selectedCategory);
@@ -69,25 +69,36 @@ export default function App() {
           <PersonalityQuiz onSelectMovie={(id) => setSelectedId(id)} />
         ) : (
           <>
-            {/* Category Filter Pills */}
             {activeTab === 'all' && !search && (
-              <div className="category-bar">
-                {CATEGORIES.map((cat) => (
-                  <button
-                    key={cat}
-                    className={`cat-pill ${selectedCategory === cat ? 'active' : ''}`}
-                    onClick={() => setSelectedCategory(cat)}
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div>
+              <>
+                <div className="category-bar">
+                  {CATEGORIES.map((cat) => (
+                    <button
+                      key={cat}
+                      className={`cat-pill ${selectedCategory === cat ? 'active' : ''}`}
+                      onClick={() => setSelectedCategory(cat)}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                </div>
+
+                <h2 className="section-title">
+                  <Flame size={22} color="#ef4444" /> Trending & Essential Movies
+                </h2>
+              </>
+            )}
+
+            {activeTab === 'favorites' && (
+              <h2 className="section-title">
+                <Film size={22} color="#8b5cf6" /> My Watchlist ({favorites.length})
+              </h2>
             )}
 
             {displayedMovies.length === 0 ? (
               <div style={{ textAlign: 'center', padding: '4rem 1rem', color: '#9ca3af' }}>
                 <h3>No movies found.</h3>
-                <p>Try searching for titles like "Interstellar", "Batman", or "Matrix".</p>
+                <p>Try searching for titles like "Oppenheimer", "Dune", "Batman", or "Gladiator".</p>
               </div>
             ) : (
               <div className="movies-grid">
