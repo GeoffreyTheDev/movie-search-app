@@ -8,14 +8,18 @@ export default function MovieCard({ movie, isFav, toggleFav, onClick }) {
     setImgError(false);
   }, [movie.Poster]);
 
-  const hasValidPoster = movie.Poster && movie.Poster !== 'N/A' && !imgError;
+  const cleanPoster = movie.Poster && movie.Poster !== 'N/A' 
+    ? movie.Poster.replace(/^http:\/\//i, 'https://')
+    : null;
+
+  const hasValidPoster = cleanPoster && !imgError;
 
   return (
     <div className="movie-card" onClick={() => onClick(movie.imdbID)}>
       <div className="poster-container">
         {hasValidPoster ? (
           <img
-            src={movie.Poster}
+            src={cleanPoster}
             alt={movie.Title}
             className="poster-img"
             referrerPolicy="no-referrer"

@@ -1,6 +1,12 @@
 const OMDB_API_KEY = 'trilogy';
 const BASE_URL = 'https://www.omdbapi.com/';
 
+// Helper function to force HTTPS on all poster URLs
+function enforceHttps(url) {
+  if (!url || url === 'N/A') return 'N/A';
+  return url.replace(/^http:\/\//i, 'https://');
+}
+
 export const FEATURED_MOVIES = [
   {
     imdbID: 'tt1375666',
@@ -38,7 +44,7 @@ export const FEATURED_MOVIES = [
     Year: '1994',
     Genre: 'Drama',
     Vibe: 'deep-story',
-    Poster: 'https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtNDA1ZS00LineWidthLTg1NDItNDliZmJjN2EwNzgxXkEyXkFqcGdeQXVyNDkzNTM2ODg@._V1_SX300.jpg',
+    Poster: 'https://m.media-amazon.com/images/M/MV5BNDE3ODcxYzMtY2YzZC00NmNlLWJiNDMtZDViZWM2MzIxZDYwXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg',
     imdbRating: '9.3',
     Plot: 'Over the course of several years, two convicts form a deep friendship, seeking consolation and redemption through basic compassion.'
   },
@@ -48,7 +54,7 @@ export const FEATURED_MOVIES = [
     Year: '1999',
     Genre: 'Sci-Fi, Action',
     Vibe: 'adrenaline',
-    Poster: 'https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg',
+    Poster: 'https://m.media-amazon.com/images/M/MV5BN2NmN2VhMTQtMDNiOS00NDlhLTliMjgtODE2N2Y1TjU2OWU1XkEyXkFqcGdeQXVyNESyNTI2NzH._V1_SX300.jpg',
     imdbRating: '8.7',
     Plot: 'A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.'
   },
@@ -58,7 +64,7 @@ export const FEATURED_MOVIES = [
     Year: '1994',
     Genre: 'Animation, Adventure',
     Vibe: 'chill',
-    Poster: 'https://m.media-amazon.com/images/M/MV5BYTYxNGMyZTYtMjE3MS00MzNjLWE0NTgtMDlmZmRjNWM2OWZjXkEyXkFqcGdeQXVyNjY5NDU4NDI@._V1_SX300.jpg',
+    Poster: 'https://m.media-amazon.com/images/M/MV5BMjIwMjE1Njg4MV5BMl5BanBnXkFtZTgwNDg1NDQxMTE@._V1_SX300.jpg',
     imdbRating: '8.5',
     Plot: 'Lion prince Simba and his father are targeted by his bitter uncle, who wants to ascend the throne himself.'
   },
@@ -91,8 +97,8 @@ export async function fetchMovies(query = '') {
   try {
     const res = await fetch(`${BASE_URL}?s=${encodeURIComponent(query)}&apikey=${OMDB_API_KEY}`);
     const data = await res.json();
-    if (data.Response === 'True') {
-      return data.Search;
+    if (data.Response === 'True' && data.Search) {
+      return data.Search.map((m) => ({ ...m, Poster: enforceHttps(m.Poster) }));
     }
     return FEATURED_MOVIES.filter(m => m.Title.toLowerCase().includes(query.toLowerCase()));
   } catch (error) {
@@ -104,7 +110,9 @@ export async function fetchMovieDetails(id) {
   try {
     const res = await fetch(`${BASE_URL}?i=${id}&plot=full&apikey=${OMDB_API_KEY}`);
     const data = await res.json();
-    if (data.Response === 'True') return data;
+    if (data.Response === 'True') {
+      return { ...data, Poster: enforceHttps(data.Poster) };
+    }
     return FEATURED_MOVIES.find(m => m.imdbID === id) || FEATURED_MOVIES[0];
   } catch (error) {
     return FEATURED_MOVIES.find(m => m.imdbID === id) || FEATURED_MOVIES[0];
@@ -132,7 +140,7 @@ export async function fetchVibeMovies(vibeId) {
       const combined = [...localMatches];
       data.Search.forEach((item) => {
         if (!combined.some((m) => m.imdbID === item.imdbID)) {
-          combined.push(item);
+          combined.push({ ...item, Poster: enforceHttps(item.Poster) });
         }
       });
       return combined;
